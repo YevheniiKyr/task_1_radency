@@ -1,0 +1,50 @@
+ #noteInput {
+     resize: none; /* Disable resizing */
+     width: 50vw;
+     margin-right: 1rem;
+     border-radius: 10px;
+     padding: 10px;
+}
+
+ #createNoteBlock {
+     margin-top: 1rem;
+     display: flex;
+     flex-wrap: wrap;
+ }
+
+ #categoryDropdown {
+     margin-top: 1rem;
+     /*one element for whole row*/
+     flex-basis: 100%;
+     margin-bottom: 0.5rem;
+ }
+
+
+ #createNoteButton {
+     margin: 1.5rem 0.5rem;
+     background-color: aliceblue;
+     border-radius: 20%;
+ }
+
+ h1 {
+     color: darkblue;
+     text-align: center;
+
+ }
+
+ table {
+     width: 100%;
+     border-collapse: collapse;
+     table-layout: fixed;
+     /* Add other table styles as needed */
+ }
+
+ th, td {
+     border: 1px solid black;
+     text-align: center;
+     padding: 8px 0;
+     /* Add other cell styles as needed */
+ }
+ #editForm{
+     ;
+ }

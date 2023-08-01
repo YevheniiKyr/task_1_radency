@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="css/notes.css">
+
+
+</head>
+
+<body>
+
+    <table id="tableNotes">
+        <thead>
+        <tr>
+            <th>Created at</th>
+            <th>Content</th>
+            <th>Category</th>
+            <th>Dates</th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+        <tbody id="notes">
+
+        <tbody>
+    </table>
+
+
+    <div id="createNoteBlock">
+        <div id="categoryDropdown">
+            <select id="categorySelect">
+                <option value="Task">Task</option>
+                <option value="Random Thought">Random Thought</option>
+                <option value="Idea">Idea</option>
+            </select>
+        </div>
+        <textarea id="noteInput" rows="5" placeholder="Enter text here..."></textarea>
+        <button id="createNoteButton">create</button>
+    </div>
+
+    <div id="editWindow" style = "display: none">
+        <h2>Edit Note</h2>
+        <form id="editForm">
+            <input type="hidden" id="editRowIndex"> <!-- Hidden input to store the row index -->
+            <label for="editContent">Content:</label>
+            <textarea id="editContent" rows="4" cols="50"></textarea>
+            <br>
+            <label for="editCategory">Category:</label>
+            <input type="text" id="editCategory">
+            <br>
+<!--            <label for="editDates">Dates:</label>-->
+<!--            <input type="text" id="editDates">-->
+            <br>
+            <button type="submit">Save</button>
+            <button type="button" id = "closeEdit">Cancel</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="./js/notes.js"></script>
+
+</body>
+
+</html>
