@@ -6,14 +6,15 @@
      padding: 10px;
 }
 
- #createNoteBlock {
+ #noteCreation {
      margin-top: 1rem;
      display: flex;
      flex-wrap: wrap;
  }
 
+
+
  #categoryDropdown {
-     margin-top: 1rem;
      /*one element for whole row*/
      flex-basis: 100%;
      margin-bottom: 0.5rem;
@@ -26,12 +27,15 @@
      border-radius: 20%;
  }
 
- h1 {
+ h1, h2 {
      color: darkblue;
      text-align: center;
 
  }
 
+ table tr button {
+     margin-right: 0.2rem;
+ }
  table {
      width: 100%;
      border-collapse: collapse;
@@ -47,4 +51,18 @@
  }
  #editForm{
      ;
+ }
+ #openArchive, #closeArchive {
+     margin-top: 1rem;
+     width: 5rem;
+     height: 3rem;
+     background-color: aliceblue;
+     border-radius: 20px;
+     text-align: center;
+     padding: 0.1rem
+
+ }
+
+ #stats {
+     margin-top: 1rem;
  }
