@@ -1,20 +1,33 @@
 //time of creation, note content, note category
 
 let notes = [
-    {id: 1, createdAt: new Date(), content: "dweddede", category: "Task", dates: ["2/3/2000"], archived: false},
-    {id: 2, createdAt: new Date(), content: "dweddede", category: "Task", dates: ["2/3/2000"], archived: false},
-    {id: 3, createdAt: new Date(), content: "dweddede", category: "Task", dates: ["2/3/2000"], archived: false},
-    {id: 4, createdAt: new Date(), content: "dweddede", category: "Idea", dates: ["2/3/2000"], archived: false},
-    {id: 5, createdAt: new Date(), content: "dweddede", category: "Idea", dates: ["2/3/2000"], archived: false},
-    {id: 6, createdAt: new Date(), content: "dweddede", category: "Random Thought", dates: ["2/3/2000"], archived: false},
-    {id: 7, createdAt: new Date(), content: "dweddede", category: "Random Thought", dates: ["2/3/2000"], archived: false}
+    {name: "djdjdjd", id: 1, createdAt: new Date(), content: "dweddede", category: "Task", dates: ["2/3/2000"], archived: false},
+    {name: "djdjdjd", id: 2, createdAt: new Date(), content: "dweddede", category: "Task", dates: ["2/3/2000"], archived: false},
+    {name: "djdjdjd", id: 3, createdAt: new Date(), content: "dweddede", category: "Task", dates: ["2/3/2000"], archived: false},
+    {name: "djdjdjd", id: 4, createdAt: new Date(), content: "dweddede", category: "Idea", dates: ["2/3/2000"], archived: false},
+    {name: "djdjdjd", id: 5, createdAt: new Date(), content: "dweddede", category: "Idea", dates: ["2/3/2000"], archived: false},
+    {name: "djdjdjd", id: 6, createdAt: new Date(), content: "dweddede", category: "Random Thought", dates: ["2/3/2000"], archived: false},
+    {name: "djdjdjd", id: 7, createdAt: new Date(), content: "dweddede", category: "Random Thought", dates: ["2/3/2000"], archived: false}
 ]
 
 const noteCategories = ["Task", "Random Thought", "Idea"]
 
+const Months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+];
+
 $(document).ready(function () {
-
-
 
     populateTable();
     populateArchive();
@@ -58,8 +71,6 @@ $(document).ready(function () {
     }
 
 
-
-
     function createCategoryStatsRow(category) {
         let row = $("<tr>");
         let notesOfCategory = notes.filter(note => note.category === category)
@@ -69,9 +80,9 @@ $(document).ready(function () {
         $("<td>").text(notesOfCategory.length - archived).appendTo(row);
         $("<td>").text(archived).appendTo(row);
 
-
         return row;
     }
+
 
     function createNoteRow(note) {
 
@@ -79,6 +90,7 @@ $(document).ready(function () {
 
         // Create and append the table cells with note data
         $("<td style='display: none;'>").text(note.id).appendTo(row);
+        $("<td>").text(note.name).appendTo(row);
         $("<td>").text(formatDate(note.createdAt)).appendTo(row);
         $("<td>").text(note.content).appendTo(row);
         $("<td>").text(note.category).appendTo(row);
@@ -86,16 +98,32 @@ $(document).ready(function () {
 
         let actions = $("<td>").appendTo(row);
 
-        $("<button>").text("Edit").appendTo(actions).on('click', function () {
-            //   let rowIndex = $(this).closest("tr").index();
+        let editImage = $("<img>", {
+            src: "../icons/edit.png",
+            alt: "Edit",
+            class: "table_icons", // Add any additional CSS classes if needed
+        });
+
+        let deleteImage = $("<img>", {
+            src: "../icons/delete.png",
+            alt: "Delete",
+            class: "table_icons", // Add any additional CSS classes if needed
+        });
+
+        let archiveImage = $("<img>", {
+            src: "../icons/archive.png",
+            alt: "Archive",
+            class: "table_icons", // Add any additional CSS classes if needed
+        });
+
+        $("<button>").append(editImage).appendTo(actions).addClass("table_button").on('click', function () {
             let row = $(this).closest("tr")
             let id = parseInt(row.find("td").eq(0).text());
             console.log("id", id)
             openEditWindow(id);
         });
 
-        $("<button>").text("Remove").appendTo(actions).on('click', function () {
-
+        $("<button>").append(deleteImage).appendTo(actions).addClass("table_button").on('click', function () {
             let row = $(this).closest("tr")
             let id = parseInt(row.find("td").eq(0).text());
             notes = notes.filter(note => note.id !== id);
@@ -103,7 +131,7 @@ $(document).ready(function () {
 
         });
 
-        $("<button>").text("Archive").appendTo(actions).on('click', function () {
+        $("<button>").append(archiveImage).appendTo(actions).addClass("table_button").on('click', function () {
             let row = $(this).closest("tr")
             let id = parseInt(row.find("td").eq(0).text());
             let idx = notes.findIndex(note => note.id === id)
@@ -114,27 +142,23 @@ $(document).ready(function () {
 
 
         function openEditWindow(id) {
-
             let idx = notes.findIndex(note => note.id === id)
             let note = notes[idx];
             console.log(idx)
             // Populate the edit window with the note data
+            $("#editName").val(note.name);
             $("#editId").val(id);
             $("#editContent").val(note.content);
-            $("#editCategory").val(note.category);
+            $("#editCategorySelect").val(note.category);
             $("#editDates").val(note.dates.join(', '));
-
             // Display the edit window
-            $("#editWindow").show();
+            $("#editWindow").css("display", "flex");
         }
-
-
         return row;
     }
 
 
     function createArchivatedNoteRow(note) {
-
         let row = $("<tr>");
 
         $("<td style='display: none;'>").text(note.id).appendTo(row);
@@ -146,8 +170,13 @@ $(document).ready(function () {
 
         let actions = $("<td>").appendTo(row);
 
-        $("<button>").text("Unarchive").appendTo(actions).on('click', function () {
+        let unarchiveImage = $("<img>", {
+            src: "../icons/unarchive.png",
+            alt: "Archive",
+            class: "table_icons", // Add any additional CSS classes if needed
+        });
 
+        $("<button>").append(unarchiveImage).appendTo(actions).addClass("table_button").on('click', function () {
             let row = $(this).closest("tr")
             let id = parseInt(row.find("td").eq(0).text());
             let idx = notes.findIndex(note => note.id === id)
@@ -156,15 +185,8 @@ $(document).ready(function () {
             populateArchive();
         });
 
-
         return row;
     }
-
-
-
-
-    // Call the function to populate the table when the page is loaded
-
 
     function parseDates(text) {
 
@@ -179,7 +201,7 @@ $(document).ready(function () {
     }
 
     function formatDate(date) {
-        return `${date.getHours()}:${date.getMinutes()} ${date.getDay() - 1}.${date.getMonth() + 1}.${date.getFullYear()}`;
+        return `${Months[date.getMonth()]} ${date.getDay()-1}, ${date.getFullYear()}`;
     }
 
 
@@ -187,6 +209,7 @@ $(document).ready(function () {
         e.preventDefault();
         let content = $("#noteInput").val()
         let newNote = {
+            name: $("#noteName").val(),
             id: notes.length + 1,
             createdAt: new Date(),
             content: content,
@@ -223,17 +246,19 @@ $(document).ready(function () {
             // Close the edit window
             $("#editWindow").hide();
         }
-
         // Get the edited data from the form
         let id = parseInt($("#editId").val());
-        let idx = notes.findIndex(note => note.id === id)
+        console.log("editId", id)
 
+        let idx = notes.findIndex(note => note.id === id)
+        let note = notes[idx]
         let content = $("#editContent").val()
         let editedNote = {
+            name:  $("#editName").val(),
             id: id,
-            createdAt: notes[idx].createdAt,
+            createdAt: note.createdAt,
             content: content,
-            category: $("#editCategory").val(),
+            category: $("#editCategorySelect").val(),
             dates: parseDates(content)
         };
 
@@ -242,15 +267,20 @@ $(document).ready(function () {
 
         // Update the table to reflect the changes
         populateTable();
-
         // Close the edit window
         closeEditWindow();
 
     })
 
-    $("#closeEdit").on("click", function (e) {
+    $("#closeEdit").on("click", function () {
         $("#editWindow").hide()
     })
 
+    $("#openCreateWindow").on("click", function () {
+        $("#createNoteBlock").css("display", "flex")
+    })
+    $("#closeCreateWindow").on("click", function () {
+        $("#createNoteBlock").css("display", "none")
+    })
 
 })
