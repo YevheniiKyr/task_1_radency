@@ -9,10 +9,90 @@
 </head>
 
 <body>
-
+<div id="tasks">
+    <h2>Notes</h2>
     <table id="tableNotes">
         <thead>
         <tr>
+            <th style="display: none;">ID</th>
+            <th>Name</th>
+            <th>Created at</th>
+            <th>Content</th>
+            <th>Category</th>
+            <th>Dates</th>
+            <th>
+                <img src="./icons/archive.png" class=table_icons>
+                <img src="./icons/delete.png" class=table_icons>
+
+            </th>
+        </tr>
+        </thead>
+        <tbody id="notes">
+
+
+        <tbody>
+    </table>
+</div>
+
+<button id="openCreateWindow" class="custom_button">Create note</button>
+<br/>
+<div id="createNoteBlock" class="custom_modal">
+
+    <form id="noteCreation">
+        <h2>Create note</h2>
+        <div class="flex">
+            <div id="categoryDropdown">
+                <select id="categorySelect">
+                    <option value="Task">Task</option>
+                    <option value="Random Thought">Random Thought</option>
+                    <option value="Idea">Idea</option>
+                </select>
+            </div>
+            <input type="text" id="noteName" placeholder="Name your note" required>
+        </div>
+        <textarea id="noteInput" rows="5" placeholder="Enter text here..." required></textarea>
+        <div class="flex">
+            <button type="submit" id="createNoteButton" class="custom_button">Create</button>
+            <button id="closeCreateWindow" class="custom_button">Cancel</button>
+        </div>
+    </form>
+</div>
+
+
+<div id="editWindow" class="custom_modal">
+
+    <form id="editForm">
+        <h2>Edit Note</h2>
+        <input type="hidden" id="editId">
+        <div class="flex">
+            <div id="editCategoryDropdown">
+                <select id="editCategorySelect">
+                    <option value="Task">Task</option>
+                    <option value="Random Thought">Random Thought</option>
+                    <option value="Idea">Idea</option>
+                </select>
+            </div>
+            <input type="text" id="editName" placeholder="Name your note" required>
+        </div>
+        <textarea id="editContent" rows="5" placeholder="Enter text here..." required></textarea>
+        <div class="flex">
+            <button type="submit" class="custom_button">Save</button>
+            <button type="button" id="closeEdit" class="custom_button">Cancel</button>
+        </div>
+
+    </form>
+</div>
+
+<button id="openArchive" class="custom_button"> See archive</button>
+<br/>
+
+<div id="archive" style="display: none">
+    <h2>Archive</h2>
+
+    <table id="archivatedTasksTable">
+        <thead>
+        <tr>
+            <th style="display: none;">ID</th>
             <th>Created at</th>
             <th>Content</th>
             <th>Category</th>
@@ -20,44 +100,34 @@
             <th>Operation</th>
         </tr>
         </thead>
-        <tbody id="notes">
+        <tbody id="archivatedTasks">
+
+        <tbody>
+
+    </table>
+</div>
+<button id="closeArchive" style="display: none" class="custom_button"> Close archive</button>
+
+
+<div id="stats">
+
+    <h2>Stats</h2>
+    <table id="statsTable">
+        <thead>
+        <tr>
+            <th>Note category</th>
+            <th>Active</th>
+            <th>Archived</th>
+        </tr>
+        </thead>
+        <tbody id="statsTasks">
 
         <tbody>
     </table>
+</div>
 
-
-    <div id="createNoteBlock">
-        <div id="categoryDropdown">
-            <select id="categorySelect">
-                <option value="Task">Task</option>
-                <option value="Random Thought">Random Thought</option>
-                <option value="Idea">Idea</option>
-            </select>
-        </div>
-        <textarea id="noteInput" rows="5" placeholder="Enter text here..."></textarea>
-        <button id="createNoteButton">create</button>
-    </div>
-
-    <div id="editWindow" style = "display: none">
-        <h2>Edit Note</h2>
-        <form id="editForm">
-            <input type="hidden" id="editRowIndex"> <!-- Hidden input to store the row index -->
-            <label for="editContent">Content:</label>
-            <textarea id="editContent" rows="4" cols="50"></textarea>
-            <br>
-            <label for="editCategory">Category:</label>
-            <input type="text" id="editCategory">
-            <br>
-<!--            <label for="editDates">Dates:</label>-->
-<!--            <input type="text" id="editDates">-->
-            <br>
-            <button type="submit">Save</button>
-            <button type="button" id = "closeEdit">Cancel</button>
-        </form>
-    </div>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="./js/notes.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="./js/notes.js"></script>
 
 </body>
 
