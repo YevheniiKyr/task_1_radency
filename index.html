@@ -38,7 +38,7 @@
 <br/>
 <div id="createNoteBlock" class="custom_modal">
 
-    <div id="noteCreation">
+    <form id="noteCreation">
         <h2>Create note</h2>
         <div class="flex">
             <div id="categoryDropdown">
@@ -48,14 +48,14 @@
                     <option value="Idea">Idea</option>
                 </select>
             </div>
-            <input type="text" id="noteName" placeholder="Name your note">
+            <input type="text" id="noteName" placeholder="Name your note" required>
         </div>
-        <textarea id="noteInput" rows="5" placeholder="Enter text here..."></textarea>
+        <textarea id="noteInput" rows="5" placeholder="Enter text here..." required></textarea>
         <div class="flex">
-            <button id="createNoteButton" class="custom_button">Create</button>
+            <button type="submit" id="createNoteButton" class="custom_button">Create</button>
             <button id="closeCreateWindow" class="custom_button">Cancel</button>
         </div>
-    </div>
+    </form>
 </div>
 
 
@@ -72,9 +72,9 @@
                     <option value="Idea">Idea</option>
                 </select>
             </div>
-            <input type="text" id="editName" placeholder="Name your note">
+            <input type="text" id="editName" placeholder="Name your note" required>
         </div>
-        <textarea id="editContent" rows="5" placeholder="Enter text here..."></textarea>
+        <textarea id="editContent" rows="5" placeholder="Enter text here..." required></textarea>
         <div class="flex">
             <button type="submit" class="custom_button">Save</button>
             <button type="button" id="closeEdit" class="custom_button">Cancel</button>

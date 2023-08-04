@@ -205,7 +205,7 @@ $(document).ready(function () {
     }
 
 
-    $("#createNoteButton").on("click", function (e) {
+    $("#noteCreation").on("submit", function (e) {
         e.preventDefault();
         let content = $("#noteInput").val()
         let newNote = {
@@ -223,6 +223,7 @@ $(document).ready(function () {
         // Append the new row to the table body
         $("#notes").append(newRow);
         populateStats();
+        $("#createNoteBlock").css("display", "none")
     });
 
 
